@@ -6,7 +6,7 @@ import React from "react";
 //we are destructuring props object here
 //because we dont have access to movie1
 //so we used props object which essentially gives us the movie
-const MovieCard = (movie) => {
+const MovieCard = ({ movie }) => {
   return (
     <div className="movie">
       <div>
@@ -18,7 +18,7 @@ const MovieCard = (movie) => {
           src={
             movie.Poster !== "N/A"
               ? movie.Poster
-              : "https://via.placeholder.com/400"
+              : "https://via.placeholder.com/400/FFF"
           }
           alt={movie.Title}
         />

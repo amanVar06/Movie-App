@@ -30,9 +30,9 @@ const App = () => {
   //you can have multiple states and even multiple useEffect hooks
   //per one component, there is no limit
 
-  // useEffect(() => {
-  //   searchMovies("Batman");
-  // }, []);
+  useEffect(() => {
+    searchMovies("Batman");
+  }, []);
 
   const searchMovies = async (title) => {
     const response = await fetch(`${API_URL}&s=${title}`);
@@ -46,8 +46,9 @@ const App = () => {
   // searchMovies(searchTerm);
 
   // console.log(movies, Array.isArray(movies));
-  console.log(searchTerm);
-  console.log(movies, Array.isArray(movies));
+  // console.log(searchTerm);
+  // console.log(movies, Array.isArray(movies));
+  // console.log(movies[0]);
 
   return (
     <div className="app">
@@ -68,9 +69,15 @@ const App = () => {
 
       {movies?.length > 0 ? (
         <div className="container">
-          {movies.forEach((movie) => {
+          {/* {movies.forEach((movie) => {
             <MovieCard movie={movie} />;
-          })}
+          })} */}
+          <MovieCard movie={movies[0]} />;
+          <MovieCard movie={movies[1]} />;
+          <MovieCard movie={movies[2]} />;
+          <MovieCard movie={movies[3]} />;
+          <MovieCard movie={movies[4]} />;
+          <MovieCard movie={movies[5]} />;
         </div>
       ) : (
         <div className="empty">
