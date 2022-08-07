@@ -1,83 +1,87 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
+
 import "./App.css";
-//React State
-//state in react is a plane javasript object used by react to represent
-//a piece of information about the component's current situation
-//it is completely managed by the component it self
+import SearchIcon from "./search.svg";
+//creating a static variable  API_URL
+const API_URL = "http://www.omdbapi.com/?apikey=7262c9bf";
 
-//showing a purpose why to use state (using a counter)
+//most importantly we want to fetch the data from this api
+//as soon as our component loads
+//we can use useEffect hook for that purpose
 
-function App() {
-  const [counter, setCounter] = useState(0); //array destructuring
-  //calling useState as a function
-  //when you call something as a function and start with use in react
-  //we call that a hook
+const movie1 = {
+  Title: "Amazing Spiderman Syndrome",
+  Year: "2012",
+  imdbID: "tt2586634",
+  Type: "movie",
+  Poster: "N/A",
+};
+//we are going to use this as static data(movie1)
+//just to render out something so that we know what jsx
+//are we writing
 
-  //first part in the square brackets pair is going to be the name
-  //of the state so lets call it counter
-  //and second part is going to be a setter fucntion
-  //we call it setCounter
+const App = () => {
+  const searchMovies = async (title) => {
+    const response = await fetch(`${API_URL}&s=${title}`);
+    const data = await response.json();
 
-  //good rule of thumb is to use
-  //name of the second variable same as first just add a prefix set to it
-  //because it is a setter function for the first variable
-  //inside the useState we provide the initial value
-
-  //events
-  //an event is a action that can be triggered as a result of
-  //user action or some kind of system generated event
-  //e.g. mouseClick or buttonPress is an event
-
-  //useEffect allows us to do something on some kind of effect
-  //or lets say on some kind of event
-  //so this code right here is going to get run as soon as the page loads
+    console.log(data.Search);
+  };
 
   useEffect(() => {
-    // alert("Reload");
-    //this code in useEffect happens as soon as below component renders
-    //knowing that this is going to happen at the start
-    //how do you change our counter, our state to be 100
-    //as soon as the page loads
-    //if we wanted to do something like this counter = 100;
-    //thats going to cause a major issue
-    //we are breaking a most important rule of react
-    //and that is never modify state manually, never mutate the state
-    //counter is not just a normal variable, it is a part of react state
-    //can only be changed using its own setter function
-    //counter = 100; this is strictly forbidden
-    // alert("You have changed the counter to " + counter);
-    setCounter(100);
+    searchMovies("Spiderman");
   }, []);
-  //second parameter to the useEffect which is called a dependency array
-  //when the dependency array left empty the code inside useEffect
-  //is only going to happen at the inital load of the component
-  //now if we write some kind of variable inside the dependency array
-  //like a counter then this code going to update everytime the variable
-  //inside of this dependency array changes
 
   return (
-    <div className="App">
-      {/* <button onClick={() => alert("clicked")}>-</button> */}
-      {/* now we dont want to alert something we want to change the state */}
-      {/* <button onClick={() => setCounter(-5)}>-</button> */}
-      <button onClick={() => setCounter((prevCount) => prevCount - 1)}>
-        -
-      </button>
-      {/* inside the setCounter we have something prevState  */}
-      {/* we see in the browser it set dynamically onClick  */}
-      <h1>{counter}</h1>
-      <button onClick={() => setCounter((prevCount) => prevCount + 1)}>
-        +
-      </button>
-      {/* thats how we re-render something on page  */}
-      {/* right now if we click on these buttons nothing going to happen
-      so we have to use states */}
+    <div className="app">
+      <h1>Movieland</h1>
+
+      <div className="search">
+        <input
+          placeholder="Search for Movies"
+          value="Superman"
+          onChange={() => {}}
+        />
+        {/* input in react needs to have another few things which are crucial
+        first is value attribute for now we have set it as a static string
+        Superman, we will notice on webpage that this input immediately
+        has the value of Superman but now if you want to type something
+        in input search bar you won't able to because the value is statically
+        set, so how to change it for that we have to have an onChange which
+        accepts a callback function
+        we are leaving it static for now but later on once we implement
+        the state we're ging to make this action changable and
+        that's going to recall our API  */}
+        <img src={SearchIcon} alt="search" onClick={() => {}} />
+      </div>
+
+      <div className="container">
+        <div className="movie">
+          <div>
+            <p>{movie1.Year}</p>
+          </div>
+
+          <div>
+            <img
+              src={
+                movie1.Poster !== "N/A"
+                  ? movie1.Poster
+                  : "https://via.placeholder.com/400"
+                //  This is a placeholder image
+              }
+              alt={movie1.Title}
+            />
+          </div>
+
+          <div>
+            <span>{movie1.Type}</span>
+            <h3>{movie1.Title}</h3>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
-
-// if you are using react then you can update everything on the page
-// without needing a page reload
-//we cant use the state without using this react hook
+};
 
 export default App;
