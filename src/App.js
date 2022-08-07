@@ -1,35 +1,37 @@
 import "./App.css";
+//React Components
+//A component is a piece of code that returns or renders some jsx
+
+const Person = (props) => {
+  return (
+    <>
+      <h1>Name : {props.name}</h1>
+      <h2>LastName : {props.lastName}</h2>
+      <h2>Age : {props.age}</h2>
+    </>
+  );
+};
+//props(important)
+//props allows you to pass dynamic data through react components
+//props are just arguments that you pass into react components
+//they are passed via attributes
+//they are just a shorter way of saying properties
+
+//Every component has a built in props object
 
 function App() {
-  //React allows to dynamically render the data with jsx
-  //on the browser
-  //we can write any java script expression inside curly braces
-  //in JSX
-  const name = "Aman";
-  // const name = null;
-  const isNameShowing = false; //try to do when this is false/true
-
-  //if you want to render two elements in jsx/react one next to another
-  //you need to wrap them in a so called react fragment
-
-  //React fragment is just an empty parenthese
-
   return (
     <div className="App">
-      <h1>Hello, React!</h1>
-      {/* <h1>Hello, {name}!</h1> */}
-      {/* <h1>Hello, {5 + 5}!</h1> */}
-      <h1>Hello, {isNameShowing ? name : "someone"}!</h1>
-      {name ? (
-        <>
-          <h1>{name}</h1>
-        </>
-      ) : (
-        <>
-          <h1>test</h1>
-          <h2>There is no name</h2>
-        </>
-      )}
+      <Person name={"John"} lastName={"Doe"} age={30} />
+      <Person name="Marry" lastName="Doe" age={25} />
+      <Person name="Kevin" lastName="Doe" age={75} />
+      {/* <Person name={"John"} lastName={"Doe"} age={30} /> */}
+      {/* <Person name="Rock" /> */}
+      {/* you can just write in quotes if its just a string  */}
+      {/* this is how we call a functional/custom component
+       with jsx in React by its name as many times we want
+       this is the advantage of using custom component 
+       we dont need to write it manually many times a block of code*/}
     </div>
   );
 }
