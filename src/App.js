@@ -45,7 +45,7 @@ const App = () => {
 
   // searchMovies(searchTerm);
 
-  // console.log(movies, Array.isArray(movies));
+  console.log(movies);
   // console.log(searchTerm);
   // console.log(movies, Array.isArray(movies));
   // console.log(movies[0]);
@@ -69,15 +69,15 @@ const App = () => {
 
       {movies?.length > 0 ? (
         <div className="container">
-          {/* {movies.forEach((movie) => {
-            <MovieCard movie={movie} />;
-          })} */}
-          <MovieCard movie={movies[0]} />;
+          {movies.map((movie) => {
+            return <MovieCard movie={movie} />;
+          })}
+          {/* <MovieCard movie={movies[0]} />;
           <MovieCard movie={movies[1]} />;
           <MovieCard movie={movies[2]} />;
           <MovieCard movie={movies[3]} />;
           <MovieCard movie={movies[4]} />;
-          <MovieCard movie={movies[5]} />;
+          <MovieCard movie={movies[5]} />; */}
         </div>
       ) : (
         <div className="empty">
