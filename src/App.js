@@ -7,28 +7,9 @@ import "./App.css";
 //creating a static variable  API_URL
 const API_URL = "http://www.omdbapi.com/?apikey=7262c9bf";
 
-// const movie1 = {
-//   Title: "Amazing Spiderman Syndrome",
-//   Year: "2012",
-//   imdbID: "tt2586634",
-//   Type: "movie",
-//   Poster: "N/A",
-// };
-
-//how can we fetch data for all the movies then display them here
-//the first step in doing that would be extracting the code for this movie
-//into its own custom component, the reason we are doing that because
-//if you think about it we are going to have many of these movie cards
-//they are going to repeated quite often,
-//so instead of soing something like this we would have to have hundreds of lines
-//to show just a few movies what we can do is just create a custom component
-//and that way we'll able to do it almost in a single line
-
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
-  //you can have multiple states and even multiple useEffect hooks
-  //per one component, there is no limit
 
   useEffect(() => {
     searchMovies("Batman");
@@ -38,17 +19,8 @@ const App = () => {
     const response = await fetch(`${API_URL}&s=${title}`);
     const data = await response.json();
 
-    // console.log(data.Search);
-
     setMovies(data.Search);
   };
-
-  // searchMovies(searchTerm);
-
-  console.log(movies);
-  // console.log(searchTerm);
-  // console.log(movies, Array.isArray(movies));
-  // console.log(movies[0]);
 
   return (
     <div className="app">
@@ -72,12 +44,6 @@ const App = () => {
           {movies.map((movie) => {
             return <MovieCard movie={movie} />;
           })}
-          {/* <MovieCard movie={movies[0]} />;
-          <MovieCard movie={movies[1]} />;
-          <MovieCard movie={movies[2]} />;
-          <MovieCard movie={movies[3]} />;
-          <MovieCard movie={movies[4]} />;
-          <MovieCard movie={movies[5]} />; */}
         </div>
       ) : (
         <div className="empty">
