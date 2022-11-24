@@ -41,8 +41,8 @@ const App = () => {
 
       {movies?.length > 0 ? (
         <div className="container">
-          {movies.map((movie) => {
-            return <MovieCard movie={movie} />;
+          {movies.map((movie, index) => {
+            return <MovieCard key={index} movie={movie} />;
           })}
         </div>
       ) : (
